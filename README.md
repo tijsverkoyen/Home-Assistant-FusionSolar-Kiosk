@@ -11,12 +11,14 @@ FusionSolar has a kiosk mode. When this kiosk mode is enabled we can access
 data about our plants through a JSON REST api.
 
 {% if installed %}
-## Breaking Changes
-
+{% if version_installed.replace("v", "").replace(".","") | int < 303  %}
 ### No longer maintained
-This integration isnot longer maintained. I strongly suggest to upgrade to the newer [FusionSolar](https://github.com/tijsverkoyen/HomeAssistant-FusionSolar)-integration. 
+**This integration is not longer maintained.**
+I strongly suggest to upgrade to the newer [FusionSolar](https://github.com/tijsverkoyen/HomeAssistant-FusionSolar)-integration. 
+{% endif %}
 
 {% if version_installed.replace("v", "").replace(".","") | int < 300  %}
+## Breaking Changes
 ### Use the full kiosk url (since v3.0.0)
 Your current configuration should be updated. Before v3.0.0 we used the kiosk id. 
 Starting with v3.0.0 the full kiosk url should be used:
