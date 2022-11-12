@@ -73,23 +73,10 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
 
             if entity is not None:
                 current_value = entity.state
-                new_value = self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI][self._attribute]
                 power = self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI][ATTR_REALTIME_POWER]
-
-                if not isfloat(new_value):
-                    _LOGGER.warning(f'{self.entity_id}: new value ({new_value}) is not a float, so not updating.')
-                    return float(current_value)
-
-                if not isfloat(current_value):
-                    _LOGGER.warning(f'{self.entity_id}: current value ({current_value}) is not a float, send 0.')
-                    return 0
 
                 if (power) == '0.00':
                     _LOGGER.debug(f'{self.entity_id}: new value ({new_value}) is discarded if no power is reported ({entity.state}), so not updating.')
-                    return float(current_value)
-
-                if float(new_value) < float(current_value):
-                    _LOGGER.debug(f'{self.entity_id}: new value ({new_value}) is smaller then current value ({entity.state}), so not updating.')
                     return float(current_value)
 
         return float(self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI] else None
