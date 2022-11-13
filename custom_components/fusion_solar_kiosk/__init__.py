@@ -76,7 +76,7 @@ class FusionSolarKioskEnergyEntity(CoordinatorEntity, SensorEntity):
                 power = self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI][ATTR_REALTIME_POWER]
 
                 if (power) == '0.00':
-                    _LOGGER.debug(f'{self.entity_id}: new value ({new_value}) is discarded if no power is reported ({entity.state}), so not updating.')
+                    _LOGGER.debug(f'{self.entity_id}: new energy value is discarded if no power is reported ({entity.state}), so not updating.')
                     return float(current_value)
 
         return float(self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI][self._attribute]) if self.coordinator.data[self._kioskId][ATTR_DATA_REALKPI] else None
